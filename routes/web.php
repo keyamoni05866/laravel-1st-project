@@ -37,3 +37,4 @@ Route::post('/profile/email/update/{id}', [ProfileController::class, 'email_upda
 Route::get('/category', [CategoryController::class, 'index'])->name('category');
 Route::post('/category/insert', [CategoryController::class, 'insert'])->name('category.insert');
 Route::post('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
+Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
