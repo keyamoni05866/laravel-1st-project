@@ -92,4 +92,25 @@ class CategoryController extends Controller
         }
         return back()->with('category_update','Category Updated Successfully');
     }
+
+
+// change status
+    public function status($id){
+    $category = Category::where('id',$id)->first();
+
+    if($category->status == 'active'){
+        Category::find($id)->update([
+            'status' => 'deactive',
+            'created_at' => now(),
+        ]);
+        return back();
+    }else{
+        Category::find($id)->update([
+            'status' => 'active',
+            'created_at' => now(),
+        ]);
+        return back();
+    }
+
+    }
 }

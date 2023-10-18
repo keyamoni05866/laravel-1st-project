@@ -62,78 +62,104 @@
                                     <th scope="row">{{ $loop->index + 1 }}</th>
 
                                     <td>{{ $category->title }}</td>
-                                    <td><button class="btn btn-info btn-sm">{{ $category->status }}</button></td>
-                                    <td><button class="btn btn-primary btn-sm "  data-bs-toggle="modal"
-                                        data-bs-target="#categoryModal2{{$category->id}}">Edit</button></td>
+        <td>
+           <form action="{{route('category.status',$category->id)}}" method="POST">
+            @csrf
+            @if ($category->status == 'active')
+                <button class="btn btn-success btn-sm">{{ $category->status }}</button>
+            @else
+            <button class="btn btn-info btn-sm">{{ $category->status }}</button>
+            @endif
 
-                    <div class="modal fade" id="categoryModal2{{$category->id}}" tabindex="-1"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Category Inventroy</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                            <div class="modal-body">
-                                <div class="card-body">
-                                    <form action="{{ route('category.update',$category->id) }}" enctype="multipart/form-data" method="POST">
-                                        @csrf
-                                        <label for="exampleInputEmail1" class="form-label">Category Title:</label>
-                                        <input type="text" class="form-control form-control-rounded" aria-describedby="..."
-                                            placeholder="Inset Category Title" name="title" value="{{ $category->title }}">
-                                        <label for="exampleInputEmail1" class="form-label mt-3">Category Slug:</label>
-                                        <input type="text" class="form-control  form-control-rounded" aria-describedby="..."
-                                            placeholder="Inset Category Slug" name="slug" value="{{ $category->slug }}">
-                                        <label for="exampleInputEmail1" class="form-label mt-3">Category Image:</label>
-                                        <input type="file" class="form-control form-control-solid-bordered form-control-rounded"
-                                            aria-describedby="..." name="image">
-                                        <button type="submit" class="btn btn-info btn-md ms-2 mt-4">Update</button>
-                                    </form>
-                                </div>
-                            </div>
+           </form>
 
-                        </div>
-                    </div>
+        </td>
+                                    <td><button class="btn btn-primary btn-sm " data-bs-toggle="modal"
+                                            data-bs-target="#categoryModal2{{ $category->id }}">Edit</button></td>
+
+                                    <div class="modal fade" id="categoryModal2{{ $category->id }}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">Category Inventroy
+                                                    </h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="card-body">
+                                                        <form action="{{ route('category.update', $category->id) }}"
+                                                            enctype="multipart/form-data" method="POST">
+                                                            @csrf
+                                                            <label for="exampleInputEmail1" class="form-label">Category
+                                                                Title:</label>
+                                                            <input type="text" class="form-control form-control-rounded"
+                                                                aria-describedby="..." placeholder="Inset Category Title"
+                                                                name="title" value="{{ $category->title }}">
+                                                            <label for="exampleInputEmail1" class="form-label mt-3">Category
+                                                                Slug:</label>
+                                                            <input type="text" class="form-control  form-control-rounded"
+                                                                aria-describedby="..." placeholder="Inset Category Slug"
+                                                                name="slug" value="{{ $category->slug }}">
+                                                            <label for="exampleInputEmail1" class="form-label mt-3">Category
+                                                                Image:</label>
+                                                            <input type="file"
+                                                                class="form-control form-control-solid-bordered form-control-rounded"
+                                                                aria-describedby="..." name="image">
+                                                            <button type="submit"
+                                                                class="btn btn-info btn-md ms-2 mt-4">Update</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
 
 
-                <form action="{{ route('category.delete', $category->id) }}" method="POST">
-                @csrf
-                <td><button type="submit" class="btn btn-dark btn-sm">Delete</button></td>
+                                        <form action="{{ route('category.delete', $category->id) }}" method="POST">
+                                            @csrf
+                                            <td><button type="submit" class="btn btn-dark btn-sm">Delete</button></td>
 
-                </form>
+                                        </form>
 
 
-<td><button type="submit" class="btn btn-outline-info btn-sm" data-bs-toggle="modal"
-        data-bs-target="#categoryModal{{$category->id}}">Info</button></td>
+                                        <td><button type="submit" class="btn btn-outline-info btn-sm"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#categoryModal{{ $category->id }}">Info</button></td>
 
-                                    <!-- Modal for info-->
-        <div class="modal fade" id="categoryModal{{$category->id}}" tabindex="-1"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Category Inventroy</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                <div class="modal-body">
-                <div class="card">
-                <div class="card-body d-flex justify-content-between">
-                    <img style="width: 150px; height:150px; border-radius:10%;" src="{{asset('uploads/category') }}/{{ $category->image}}" alt="">
+                                        <!-- Modal for info-->
+                                        <div class="modal fade" id="categoryModal{{ $category->id }}" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Category
+                                                            Inventroy</h1>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="card">
+                                                            <div class="card-body d-flex justify-content-between">
+                                                                <img style="width: 150px; height:150px; border-radius:10%;"
+                                                                    src="{{ asset('uploads/category') }}/{{ $category->image }}"
+                                                                    alt="">
 
-                    <div class="mt-4">
-                        <h5>Title: {{$category->title}}</h5>
-                    <h6>Slug: {{$category->slug}}</h6>
-                    <h6>Submit Date:  {{ \Carbon\Carbon::parse($category->created_at)->format('M,d-Y')}}</h6>
-                    </div>
-                </div>
-                </div>
-                </div>
+                                                                <div class="mt-4">
+                                                                    <h5>Title: {{ $category->title }}</h5>
+                                                                    <h6>Slug: {{ $category->slug }}</h6>
+                                                                    <h6>Submit Date:
+                                                                        {{ \Carbon\Carbon::parse($category->created_at)->format('M,d-Y') }}
+                                                                    </h6>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-            </div>
-        </div>
-    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 
 
 
@@ -175,7 +201,7 @@
             })
         </script>
     @endif
-{{-- delete --}}
+    {{-- delete --}}
     @if (session('delete_success'))
         <script>
             const Toast = Swal.mixin({

@@ -66,6 +66,10 @@
                 <a href="{{route('category')}}" class="active"><i class="material-icons-two-tone">category</i>Categories</a>
                     </li>
 
+                    <li class="{{ (\Request::route()->getName() == 'tag') ? 'active-page' : '' }}">
+                <a href="{{route('tag')}}" class="active"><i class="material-icons-two-tone">tag</i>Tags</a>
+                    </li>
+
                     <li>
                         <a href="#"><i class="material-icons-two-tone">grid_on</i>Tables<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
                         <ul class="sub-menu">
