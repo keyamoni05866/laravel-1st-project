@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
@@ -50,3 +51,14 @@ Route::post('/tag/insert', [TagController::class, 'insert'])->name('tag.insert')
 Route::post('/tag/status/{id}', [TagController::class, 'status'])->name('tag.status');
 Route::post('/tag/delete/{id}', [TagController::class, 'delete'])->name('tag.delete');
 Route::post('/tag/update/{id}', [TagController::class, 'update'])->name('tag.update');
+
+
+// Blog Controller
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/insert/view', [BlogController::class, 'insert_view'])->name('blog.insert.view');
+Route::post('/blog/insert', [BlogController::class, 'insert'])->name('blog.insert');
+Route::post('/blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
+Route::post('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore');
+Route::post('/blog/restore/delete/{id}', [BlogController::class, 'restore_delete'])->name('blog.restore.delete');
+
+

@@ -60,7 +60,7 @@
                     <tbody>
                         @forelse ($tags as $tag)
                             <tr>
-                                <th scope="row">{{ $loop->index + 1 }}</th>
+                                <th scope="row">{{ $tags->firstItem() + $loop->index}}</th>
 
                                 <td>{{ $tag->title }}</td>
 
@@ -97,7 +97,7 @@
                             @csrf
                             <label for="exampleInputEmail1" class="form-label">Tag Title:</label>
                             <input type="text" class="form-control form-control-rounded " aria-describedby="..."
-                                placeholder="Inset Category Title" name="title" value="{{$tag->title}}">
+                                placeholder="Insert Category Title" name="title" value="{{$tag->title}}">
                             <button type="submit" class="btn btn-info btn-md ms-2 mt-4">Update</button>
                         </form>
                                                 </div>
@@ -115,11 +115,6 @@
 
 
 
-
-
-
-
-
                             </tr>
 
                         @empty
@@ -131,6 +126,7 @@
 
                     </tbody>
                 </table>
+                {{ $tags->links() }}
             </div>
         </div>
     </div>

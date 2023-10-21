@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,22 +15,35 @@
 
     <!-- Styles -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
-    <link href="{{asset('dashboard_assets')}}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="{{asset('dashboard_assets')}}/assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
-    <link href="{{asset('dashboard_assets')}}/assets/plugins/pace/pace.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
+    <link href="{{ asset('dashboard_assets') }}/assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('dashboard_assets') }}/assets/plugins/perfectscroll/perfect-scrollbar.css" rel="stylesheet">
+    <link href="{{ asset('dashboard_assets') }}/assets/plugins/pace/pace.css" rel="stylesheet">
 
     {{-- sweet alert --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Theme Styles -->
-    <link href="{{asset('dashboard_assets')}}/assets/css/main.min.css" rel="stylesheet">
-    <link href="{{asset('dashboard_assets')}}/assets/css/custom.css" rel="stylesheet">
+    {{-- summer note code --}}
 
-    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('dashboard_assets')}}/assets/images/neptune.png" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{asset('dashboard_assets')}}/assets/images/neptune.png" />
+    {{-- <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Theme Styles -->
+    <link href="{{ asset('dashboard_assets') }}/assets/css/main.min.css" rel="stylesheet">
+    <link href="{{ asset('dashboard_assets') }}/assets/css/custom.css" rel="stylesheet">
+
+    <link rel="icon" type="image/png" sizes="32x32"
+        href="{{ asset('dashboard_assets') }}/assets/images/neptune.png" />
+    <link rel="icon" type="image/png" sizes="16x16"
+        href="{{ asset('dashboard_assets') }}/assets/images/neptune.png" />
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,6 +52,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body>
     <div class="app align-content-stretch d-flex flex-wrap">
         <div class="app-sidebar">
@@ -45,9 +60,10 @@
                 <a href="index.html" class="logo-icon"><span class="logo-text">Neptune</span></a>
                 <div class="sidebar-user-switcher user-activity-online">
                     <a href="#">
-                        <img src="{{asset('uploads/default')}}/{{auth()->user()->image}}">
+                        <img src="{{ asset('uploads/default') }}/{{ auth()->user()->image }}">
                         <span class="activity-indicator"></span>
-                        <span class="user-info-text">{{ auth()->user()->name}}<br><span class="user-state-info">{{ auth()->user()->email}}</span></span>
+                        <span class="user-info-text">{{ auth()->user()->name }}<br><span
+                                class="user-state-info">{{ auth()->user()->email }}</span></span>
                     </a>
                 </div>
             </div>
@@ -56,31 +72,36 @@
                     <li class="sidebar-title">
                         Apps
                     </li>
-                    <li class="{{ (\Request::route()->getName() == 'home') ? 'active-page' : '' }}">
-                        <a href="{{ route('home')}}" class="active"><i class="material-icons-two-tone">dashboard</i>Dashboard</a>
+                    <li class="{{ \Request::route()->getName() == 'home' ? 'active-page' : '' }}">
+                        <a href="{{ route('home') }}" class="active"><i
+                                class="material-icons-two-tone">dashboard</i>Dashboard</a>
                     </li>
-                    <li class="{{ (\Request::route()->getName() == 'profile.index') ? 'active-page' : '' }}">
-                        <a href="{{route('profile.index')}}" class="active"><i class="material-icons-two-tone">face</i>Profile</a>
+                    <li class="{{ \Request::route()->getName() == 'profile.index' ? 'active-page' : '' }}">
+                        <a href="{{ route('profile.index') }}" class="active"><i
+                                class="material-icons-two-tone">face</i>Profile</a>
                     </li>
-                    <li class="{{ (\Request::route()->getName() == 'category') ? 'active-page' : '' }}">
-                <a href="{{route('category')}}" class="active"><i class="material-icons-two-tone">category</i>Categories</a>
+                    <li class="{{ \Request::route()->getName() == 'category' ? 'active-page' : '' }}">
+                        <a href="{{ route('category') }}" class="active"><i
+                                class="material-icons-two-tone">category</i>Categories</a>
                     </li>
 
-                    <li class="{{ (\Request::route()->getName() == 'tag') ? 'active-page' : '' }}">
-                <a href="{{route('tag')}}" class="active"><i class="material-icons-two-tone">tag</i>Tags</a>
+                    <li class="{{ \Request::route()->getName() == 'tag' ? 'active-page' : '' }}">
+                        <a href="{{ route('tag') }}" class="active"><i class="material-icons-two-tone">tag</i>Tags</a>
                     </li>
 
-                    <li>
-                        <a href="#"><i class="material-icons-two-tone">grid_on</i>Tables<i class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
-                        <ul class="sub-menu">
+
+                    <li class="{{ \Request::route()->getName() == 'blog.insert.view' || 'blog' ? 'active-page' : ' ' }}" >
+                        <a  href=""><i class="material-icons-two-tone">compost</i>Blogs<i
+                                class="material-icons has-sub-menu">keyboard_arrow_right</i></a>
+                        <ul class="sub-menu" >
                             <li>
-                                <a href="tables-basic.html">Basic</a>
+                                <a href="{{route('blog.insert.view')}}">Insert Blogs</a>
                             </li>
                             <li>
-                                <a href="tables-datatable.html">DataTable</a>
+                                <a href="{{route('blog')}}">Blogs</a>
                             </li>
                         </ul>
-
+                    </li>
                 </ul>
             </div>
         </div>
@@ -97,10 +118,12 @@
                         <div class="navbar-nav" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link hide-sidebar-toggle-button" href="#"><i class="material-icons">first_page</i></a>
+                                    <a class="nav-link hide-sidebar-toggle-button" href="#"><i
+                                            class="material-icons">first_page</i></a>
                                 </li>
                                 <li class="nav-item dropdown hidden-on-mobile">
-                                    <a class="nav-link dropdown-toggle" href="#" id="addDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="addDropdownLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="material-icons">add</i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="addDropdownLink">
@@ -110,10 +133,12 @@
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown hidden-on-mobile">
-                                    <a class="nav-link dropdown-toggle" href="#" id="exploreDropdownLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a class="nav-link dropdown-toggle" href="#" id="exploreDropdownLink"
+                                        role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         <i class="material-icons-outlined">explore</i>
                                     </a>
-                                    <ul class="dropdown-menu dropdown-lg large-items-menu" aria-labelledby="exploreDropdownLink">
+                                    <ul class="dropdown-menu dropdown-lg large-items-menu"
+                                        aria-labelledby="exploreDropdownLink">
                                         <li>
                                             <h6 class="dropdown-header">Repositories</h6>
                                         </li>
@@ -122,9 +147,11 @@
                                                 <h5 class="dropdown-item-title">
                                                     Neptune iOS
                                                     <span class="badge badge-warning">1.0.2</span>
-                                                    <span class="hidden-helper-text">switch<i class="material-icons">keyboard_arrow_right</i></span>
+                                                    <span class="hidden-helper-text">switch<i
+                                                            class="material-icons">keyboard_arrow_right</i></span>
                                                 </h5>
-                                                <span class="dropdown-item-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                                <span class="dropdown-item-description">Lorem Ipsum is simply dummy
+                                                    text of the printing and typesetting industry.</span>
                                             </a>
                                         </li>
                                         <li>
@@ -132,9 +159,11 @@
                                                 <h5 class="dropdown-item-title">
                                                     Neptune Android
                                                     <span class="badge badge-info">dev</span>
-                                                    <span class="hidden-helper-text">switch<i class="material-icons">keyboard_arrow_right</i></span>
+                                                    <span class="hidden-helper-text">switch<i
+                                                            class="material-icons">keyboard_arrow_right</i></span>
                                                 </h5>
-                                                <span class="dropdown-item-description">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                                                <span class="dropdown-item-description">Lorem Ipsum is simply dummy
+                                                    text of the printing and typesetting industry.</span>
                                             </a>
                                         </li>
                                         <li class="dropdown-btn-item d-grid">
@@ -157,19 +186,32 @@
                                     <a class="nav-link" href="#">Projects</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link toggle-search" href="#"><i class="material-icons">search</i></a>
+                                    <a class="nav-link toggle-search" href="#"><i
+                                            class="material-icons">search</i></a>
                                 </li>
                                 <li class="nav-item hidden-on-mobile">
-                                    <a class="nav-link language-dropdown-toggle" href="#" id="languageDropDown" data-bs-toggle="dropdown"><img src="{{asset('dashboard_assets')}}/assets/images/flags/us.png" alt=""></a>
-                                        <ul class="dropdown-menu dropdown-menu-end language-dropdown" aria-labelledby="languageDropDown">
-                                            <li><a class="dropdown-item" href="#"><img src="{{asset('dashboard_assets')}}/assets/images/flags/germany.png" alt="">German</a></li>
-                                            <li><a class="dropdown-item" href="#"><img src="{{asset('dashboard_assets')}}/assets/images/flags/italy.png" alt="">Italian</a></li>
-                                            <li><a class="dropdown-item" href="#"><img src="{{asset('dashboard_assets')}}/assets/images/flags/china.png" alt="">Chinese</a></li>
-                                        </ul>
+                                    <a class="nav-link language-dropdown-toggle" href="#" id="languageDropDown"
+                                        data-bs-toggle="dropdown"><img
+                                            src="{{ asset('dashboard_assets') }}/assets/images/flags/us.png"
+                                            alt=""></a>
+                                    <ul class="dropdown-menu dropdown-menu-end language-dropdown"
+                                        aria-labelledby="languageDropDown">
+                                        <li><a class="dropdown-item" href="#"><img
+                                                    src="{{ asset('dashboard_assets') }}/assets/images/flags/germany.png"
+                                                    alt="">German</a></li>
+                                        <li><a class="dropdown-item" href="#"><img
+                                                    src="{{ asset('dashboard_assets') }}/assets/images/flags/italy.png"
+                                                    alt="">Italian</a></li>
+                                        <li><a class="dropdown-item" href="#"><img
+                                                    src="{{ asset('dashboard_assets') }}/assets/images/flags/china.png"
+                                                    alt="">Chinese</a></li>
+                                    </ul>
                                 </li>
                                 <li class="nav-item hidden-on-mobile">
-                                    <a class="nav-link nav-notifications-toggle" id="notificationsDropDown" href="#" data-bs-toggle="dropdown">4</a>
-                                    <div class="dropdown-menu dropdown-menu-end notifications-dropdown" aria-labelledby="notificationsDropDown">
+                                    <a class="nav-link nav-notifications-toggle" id="notificationsDropDown"
+                                        href="#" data-bs-toggle="dropdown">4</a>
+                                    <div class="dropdown-menu dropdown-menu-end notifications-dropdown"
+                                        aria-labelledby="notificationsDropDown">
                                         <h6 class="dropdown-header">Notifications</h6>
                                         <div class="notifications-dropdown-list">
                                             <a href="#">
@@ -180,7 +222,8 @@
                                                         </span>
                                                     </div>
                                                     <div class="notifications-dropdown-item-text">
-                                                        <p class="bold-notifications-text">Donec tempus nisi sed erat vestibulum, eu suscipit ex laoreet</p>
+                                                        <p class="bold-notifications-text">Donec tempus nisi sed erat
+                                                            vestibulum, eu suscipit ex laoreet</p>
                                                         <small>19:00</small>
                                                     </div>
                                                 </div>
@@ -193,7 +236,8 @@
                                                         </span>
                                                     </div>
                                                     <div class="notifications-dropdown-item-text">
-                                                        <p class="bold-notifications-text">Quisque ligula dui, tincidunt nec pharetra eu, fringilla quis mauris</p>
+                                                        <p class="bold-notifications-text">Quisque ligula dui,
+                                                            tincidunt nec pharetra eu, fringilla quis mauris</p>
                                                         <small>18:00</small>
                                                     </div>
                                                 </div>
@@ -215,7 +259,8 @@
                                                 <div class="notifications-dropdown-item">
                                                     <div class="notifications-dropdown-item-image">
                                                         <span class="notifications-badge">
-                                                            <img src="{{asset('dashboard_assets')}}/assets/images/avatars/avatar.png" alt="">
+                                                            <img src="{{ asset('dashboard_assets') }}/assets/images/avatars/avatar.png"
+                                                                alt="">
                                                         </span>
                                                     </div>
                                                     <div class="notifications-dropdown-item-text">
@@ -228,11 +273,13 @@
                                                 <div class="notifications-dropdown-item">
                                                     <div class="notifications-dropdown-item-image">
                                                         <span class="notifications-badge">
-                                                            <img src="{{asset('dashboard_assets')}}/assets/images/avatars/avatar.png" alt="">
+                                                            <img src="{{ asset('dashboard_assets') }}/assets/images/avatars/avatar.png"
+                                                                alt="">
                                                         </span>
                                                     </div>
                                                     <div class="notifications-dropdown-item-text">
-                                                        <p>Praesent lacinia ante eget tristique mattis. Nam sollicitudin velit sit amet auctor porta</p>
+                                                        <p>Praesent lacinia ante eget tristique mattis. Nam sollicitudin
+                                                            velit sit amet auctor porta</p>
                                                         <small>yesterday</small>
                                                     </div>
                                                 </div>
@@ -241,7 +288,7 @@
                                     </div>
                                 </li>
 
-                                <form action="{{route('logout')}}" method="POST">
+                                <form action="{{ route('logout') }}" method="POST">
                                     @csrf
                                     <li>
                                         <button type="submit" class="btn btn-info btn-md mt-2 ms-1">LOGOUT</button>
@@ -268,14 +315,16 @@
     </div>
 
     <!-- Javascripts -->
-    <script src="{{asset('dashboard_assets')}}/assets/plugins/jquery/jquery-3.5.1.min.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/plugins/pace/pace.min.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/plugins/apexcharts/apexcharts.min.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/js/main.min.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/js/custom.js"></script>
-    <script src="{{asset('dashboard_assets')}}/assets/js/pages/dashboard.js"></script>
+    {{-- <script src="{{ asset('dashboard_assets') }}/assets/plugins/jquery/jquery-3.5.1.min.js"></script> --}}
+    <script src="{{ asset('dashboard_assets') }}/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/assets/plugins/perfectscroll/perfect-scrollbar.min.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/assets/plugins/pace/pace.min.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/assets/plugins/apexcharts/apexcharts.min.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/assets/js/main.min.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/assets/js/custom.js"></script>
+    <script src="{{ asset('dashboard_assets') }}/assets/js/pages/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
     @yield('footer_script')
 </body>
+
 </html>

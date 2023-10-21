@@ -11,4 +11,8 @@ class Tag extends Model
     use SoftDeletes;
     protected $guarded = [ " " ];
 
+
+    public function ManyRelationBlogs(){
+        return $this->belongsToMany(Blog::class);
+    }
 }
