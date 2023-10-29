@@ -31,60 +31,59 @@
                 <div class="modal-body">
 
 
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Title</th>
-                            <th scope="col">User Name</th>
-                            <th scope="col">Category Name</th>
-                            <th scope="col">Restore</th>
-                            <th scope="col">Action</th>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Title</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Category Name</th>
+                                <th scope="col">Restore</th>
+                                <th scope="col">Action</th>
 
 
-                        </tr>
-                    </thead>
-                    <tbody>
+                            </tr>
+                        </thead>
+                        <tbody>
 
-                      @forelse ($trashes as $trash)
+                            @forelse ($trashes as $trash)
+                                <tr>
+                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <td>
+                                        <img src="{{ asset('uploads/blog') }}/{{ $trash->image }}" alt=""
+                                            style="width:80px; height:50px; border-radius:50%">
+                                    </td>
+                                    <td>{{ $trash->title }}</td>
 
-                      <tr>
-                          <th scope="row">{{ $loop->index +1 }}</th>
-                          <td>
-                              <img src="{{ asset('uploads/blog') }}/{{ $trash->image }}" alt=""
-                                  style="width:80px; height:50px; border-radius:50%">
-                          </td>
-                          <td>{{ $trash->title }}</td>
+                                    <td>{{ $trash->RelationWithUser->name }}</td>
+                                    <td>{{ $trash->RelationWithCategory->title }}</td>
+                                    <td>
 
-                          <td>{{ $trash->RelationWithUser->name }}</td>
-                          <td>{{ $trash->RelationWithCategory->title }}</td>
-                          <td>
+                                        <form action="{{ route('blog.restore', $trash->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-info btn-sm">Restore</button>
+                                        </form>
 
-                           <form action="{{ route('blog.restore', $trash->id)}}" method="POST">
-                            @csrf
-                            <button class="btn btn-info btn-sm">Restore</button>
-                           </form>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('blog.restore.delete', $trash->id) }}" method="POST">
+                                            @csrf
+                                            <button class="btn btn-dark btn-sm">Permanent Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            @empty
 
-                          </td>
-                       <td>
-                       <form action="{{ route('blog.restore.delete', $trash->id)}}" method="POST">
-                        @csrf
-                        <button class="btn btn-dark btn-sm">Permanent Delete</button>
-                       </form>
-                       </td>
-                      </tr>
-                  @empty
-
-                      <tr>
-                          <td colspan="9" class="text-danger text-center">No Blogs Found </td>
-                      </tr>
-                  @endforelse
+                                <tr>
+                                    <td colspan="9" class="text-danger text-center">No Blogs Found </td>
+                                </tr>
+                            @endforelse
 
 
-                    </tbody>
+                        </tbody>
 
-                </table>
+                    </table>
 
 
                 </div>
@@ -115,6 +114,7 @@
                                 <th scope="col">Details</th>
                                 <th scope="col">Action</th>
                                 <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -129,7 +129,17 @@
 
                                     <td>{{ $blog->RelationWithUser->name }}</td>
                                     <td>{{ $blog->RelationWithCategory->title }}</td>
-                                    <td><button class="btn  btn-outline-secondary btn-sm">{{ $blog->status }}</button></td>
+                                    <td>
+                                       @if ($blog->status == 'active')
+                                        <a href="{{ route('blog.status', $blog->id) }}" class="btn  btn-success btn-sm">{{ $blog->status }}</a
+                                       @else
+                                        <a href="{{ route('blog.status', $blog->id) }}" class="btn  btn-outline-secondary btn-sm">{{ $blog->status }}</a
+
+
+                                       @endif
+
+
+                                        </td>
 
                                     {{-- for info --}}
                                     <td>
@@ -154,7 +164,8 @@
 
                                                         <div class="mt-4 ms-3 ">
                                                             <h4 class=" text-center mb-3"><span class="fw-bold"> </span>
-                                                                <span class="text-info">{{ $blog->title }}</span> </h4>
+                                                                <span class="text-info">{{ $blog->title }}</span>
+                                                            </h4>
 
                                                             <h6 class="fs-5"><span class=" me-2">Your Name:</span>
                                                                 {{ $blog->RelationWithUser->name }} </h6>
@@ -181,12 +192,26 @@
 
 
 
-                                    <td><button class="btn btn-primary btn-sm">Edit</button></td>
+                                    <td><a href="{{ route('blog.edit.view', $blog->id) }}"
+                                            class="btn btn-primary btn-sm">Edit</a></td>
                                     <td>
                                         <form action="{{ route('blog.delete', $blog->id) }}" method="POST">
                                             @csrf
                                             <button class="btn btn-dark btn-sm">Delete</button>
                                         </form>
+                                    </td>
+                                    <td>
+                                        @if ( $blog->feature == 'active')
+                                            <a href="{{ route('blog.feature', $blog->id) }}"
+                                                class="btn btn-success btn-sm">Featured</a>
+
+
+                                         @else
+                                            <a href="{{ route('blog.feature', $blog->id) }}"
+                                                class="btn btn-primary btn-sm">Feature</a>
+
+
+                                        @endif
                                     </td>
                                 </tr>
                             @empty

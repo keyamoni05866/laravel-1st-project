@@ -47,7 +47,7 @@
             <div class="logo">
                 <a href="index.html">Neptune</a>
             </div>
-            <p class="auth-description">Please sign-in to your account and continue to the dashboard.<br>Don't have an account? <a href="{{ route('register') }}">Sign Up</a></p>
+            <p class="auth-description">Please sign-in to your account and continue to the dashboard.<br>Don't have an account? <a href="javscript::void()">Sign Up</a></p>
             <form action="{{ route('login') }}" method="POST">
                 @csrf
                 {{-- csrf full meaning is cross site request forgery --}}

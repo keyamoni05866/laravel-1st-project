@@ -22,7 +22,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+// for registration off
+
+// Auth::routes(['register' => false]);
 Auth::routes();
+
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
@@ -60,5 +64,9 @@ Route::post('/blog/insert', [BlogController::class, 'insert'])->name('blog.inser
 Route::post('/blog/delete/{id}', [BlogController::class, 'delete'])->name('blog.delete');
 Route::post('/blog/restore/{id}', [BlogController::class, 'restore'])->name('blog.restore');
 Route::post('/blog/restore/delete/{id}', [BlogController::class, 'restore_delete'])->name('blog.restore.delete');
+Route::get('/blog/edit/view/{id}', [BlogController::class, 'edit_view'])->name('blog.edit.view');
+Route::post('/blog/edit/{id}', [BlogController::class, 'edit'])->name('blog.edit');
+Route::get('/blog/feature/update/{id}', [BlogController::class, 'feature'])->name('blog.feature');
+Route::get('/blog/status/{id}', [BlogController::class, 'status'])->name('blog.status');
 
 

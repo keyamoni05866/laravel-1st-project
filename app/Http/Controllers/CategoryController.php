@@ -28,6 +28,7 @@ class CategoryController extends Controller
                 if($request->slug){
                     Category::insert([
                         'title' => $request->title,
+                        'user_id' => auth()->id(),
                         'slug' =>Str::slug($request->slug),
                         'image' => $new_name,
                         'created_at' =>now(),
@@ -35,6 +36,7 @@ class CategoryController extends Controller
                 }else{
                     Category::insert([
                         'title' => $request->title,
+                        'user_id' => auth()->id(),
                         'slug' =>Str::slug($request->title),
                         'image' => $new_name,
                         'created_at' =>now(),
@@ -70,6 +72,7 @@ class CategoryController extends Controller
                 if($request->slug){
                     Category::find($id)->update([
                         'title' => $request->title,
+                        'user_id' => auth()->id(),
                         'slug' =>Str::slug($request->slug),
                         'image' => $new_name,
                         'created_at' =>now(),
@@ -78,6 +81,7 @@ class CategoryController extends Controller
                     unlink(public_path('uploads/category/'.$category->image));
                     Category::find($id)->update([
                         'title' => $request->title,
+                        'user_id' => auth()->id(),
                         'slug' =>Str::slug($request->title),
                         'image' => $new_name,
                         'created_at' =>now(),
@@ -86,6 +90,7 @@ class CategoryController extends Controller
         }else{
             Category::find($id)->update([
                 'title' => $request->title,
+                'user_id' => auth()->id(),
                 'slug' =>Str::slug($request->slug),
                 'created_at' =>now(),
             ]);

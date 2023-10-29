@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('tags', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('user_id');
             $table->string('status')->default('deactive');
             $table->timestamps();
             $table->softDeletes();

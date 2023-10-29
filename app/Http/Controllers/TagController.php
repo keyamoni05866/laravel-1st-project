@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
          public function index(){
-            $tags=Tag::paginate(2);
+            $tags=Tag::where('user_id', auth()->id())->paginate(4);
             return view('dashboard.tag.index',compact('tags'));
          }
 
@@ -20,6 +20,7 @@ class TagController extends Controller
 
           Tag::insert([
                   'title'=> $request->title,
+                  'user_id'=> auth()->id(),
                   'created_at'=> now(),
           ]);
 
@@ -58,9 +59,6 @@ class TagController extends Controller
     // update
 
     public function update(Request $request,$id){
-
-
-
         Tag::find($id)->update([
             'title' => $request->title,
         ]);

@@ -10,7 +10,7 @@ use Intervention\Image\Facades\Image;
 class BlogController extends Controller
 {
     public function index(){
-        $blogs = Blog::paginate(2);
+        $blogs = Blog::where('user_id',auth()->id())->paginate(2);
         $trashes = Blog::onlyTrashed()->get();
         return view('dashboard.blog.index',compact('blogs','trashes'));
     }
@@ -67,4 +67,101 @@ class BlogController extends Controller
         // $blogs->save();
         return back();
     }
+
+
+    // Edit view
+
+         public function edit_view($id){
+            $categories = Category::all();
+            $tags = Tag::all();
+            $blog = Blog::where('id',$id)->first();
+
+            return view('dashboard.blog.edit',[
+                'categories' =>$categories,
+                'tags' =>$tags,
+                'blog' =>$blog,
+
+            ]);
+
+         }
+         public function edit(Request $request, $id){
+          if($request->file('image')){
+            $blog = Blog::where('id',$id)->first();
+             unlink(public_path('uploads/blog/'. $blog->image));
+
+                  $new_name = $id.'-'.$request->title.'-'.now()->format('d-m-Y').'.'.$request->file('image')->getClientOriginalExtension();
+
+                  $img = Image::make($request->file('image'))->resize(300, 200);
+                  $img->save(base_path('public/uploads/blog/'.$new_name), 60);
+
+                  $blog = Blog::find($id);
+                  $blog->title = $request->title;
+                  $blog->description = $request->description;
+                  $blog->image = $new_name;
+                  $blog->date = $request->date;
+                  $blog->category_id = $request->category_id;
+                  $blog->user_id = auth()->id();
+
+                  $blog->updated_at = now();
+                  $blog->ManyRelationTags()->sync($request->ids);
+                  $blog->save();
+                  return redirect()->route('blog');
+
+
+          }else{
+
+            $blog = Blog::find($id);
+            $blog->title = $request->title;
+            $blog->description = $request->description;
+            $blog->date = $request->date;
+            $blog->category_id = $request->category_id;
+            $blog->user_id = auth()->id();
+            $blog->updated_at = now();
+
+            $blog->ManyRelationTags()->sync($request->ids);
+            $blog->save();
+            return redirect()->route('blog');
+          }
+
+         }
+
+        //  feature post
+
+        public function feature($id){
+            $blog = Blog::where('id', $id)->first();
+
+            if($blog->feature == 'active'){
+                Blog::find($id)->update([
+                 'feature' => 'deactive',
+                 'update_at' => now(),
+                ]);
+                return back();
+            }else{
+                Blog::find($id)->update([
+                    'feature' => 'active',
+                    'update_at' => now(),
+                   ]);
+                   return back();
+            }
+        }
+        // blog status change
+
+        public function status($id){
+           $blog = Blog::where('id',$id)->first();
+
+           if($blog->status == 'deactive'){
+            Blog::find($id)->update([
+                 'status' => 'active',
+                 'update_at'=> now(),
+            ]);
+            return back();
+           }else{
+            Blog::find($id)->update([
+                'status' => 'deactive',
+                'update_at'=> now(),
+           ]);
+           return back();
+           }
+        }
+
 }
