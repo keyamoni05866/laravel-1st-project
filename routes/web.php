@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -36,6 +37,14 @@ Route::post('/profile/name/update/{id}', [ProfileController::class, 'name_update
 Route::post('/profile/image/update/{id}', [ProfileController::class, 'image_update'])->name('profile.image.update');
 Route::post('/profile/password/update/{id}', [ProfileController::class, 'password_update'])->name('profile.password.update');
 Route::post('/profile/email/update/{id}', [ProfileController::class, 'email_update'])->name('profile.email.update');
+
+// Settings Controller
+Route::get('/settings', [SettingsController::class, 'index'])->name('settings');
+Route::post('/admin/insert', [SettingsController::class, 'insert'])->name('admin.insert');
+Route::post('/role/assign', [SettingsController::class, 'role_update'])->name('role.update');
+
+
+
 
 // Category Controller
 

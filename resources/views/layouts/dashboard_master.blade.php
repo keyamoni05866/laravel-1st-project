@@ -80,6 +80,10 @@
                         <a href="{{ route('profile.index') }}" class="active"><i
                                 class="material-icons-two-tone">face</i>Profile</a>
                     </li>
+                    <li class="{{ \Request::route()->getName() == 'settings' ? 'active-page' : '' }}">
+                        <a href="{{ route('settings') }}" class="active"><i
+                                class="material-icons-two-tone">settings</i>Settings</a>
+                    </li>
                   @if (auth()->user()->role == 'admin')
                       <li class="{{ \Request::route()->getName() == 'category' ? 'active-page' : '' }}">
                           <a href="{{ route('category') }}" class="active"><i
