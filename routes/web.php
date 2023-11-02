@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
@@ -19,17 +20,25 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// frontend start
+
+
+
+Route::get('/', [FrontendController::class, 'index'])->name('root');
+
+
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 // for registration off
 
-// Auth::routes(['register' => false]);
-Auth::routes();
-
+Auth::routes(['register' => false]);
+// Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+// dashboard starts
 
 // Profile Controller
 Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
@@ -49,11 +58,11 @@ Route::post('/role/assign', [SettingsController::class, 'role_update'])->name('r
 // Category Controller
 
 
-Route::get('/category', [CategoryController::class, 'index'])->name('category');
-Route::post('/category/insert', [CategoryController::class, 'insert'])->name('category.insert');
-Route::post('/category/delete/{id}', [CategoryController::class, 'delete'])->name('category.delete');
-Route::post('/category/update/{id}', [CategoryController::class, 'update'])->name('category.update');
-Route::post('/category/status/{id}', [CategoryController::class, 'status'])->name('category.status');
+Route::get('/category', [CategoryController::class, 'index'])->middleware('rolecheck')->name('category');
+Route::post('/category/insert', [CategoryController::class, 'insert'])->middleware('rolecheck')->name('category.insert');
+Route::post('/category/delete/{id}', [CategoryController::class, 'delete'])->middleware('rolecheck')->name('category.delete');
+Route::post('/category/update/{id}', [CategoryController::class, 'update'])->middleware('rolecheck')->name('category.update');
+Route::post('/category/status/{id}', [CategoryController::class, 'status'])->middleware('rolecheck')->name('category.status');
 
 
 

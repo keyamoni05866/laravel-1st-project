@@ -41,7 +41,7 @@
     <div class="col-8">
         <div class="card">
             <div class="card-header">
-                <h4>Category Lists</h4>
+                <h4>Tag Lists</h4>
             </div>
             <div class="card-body ">
                 <table class="table">

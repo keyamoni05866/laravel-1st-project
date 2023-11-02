@@ -11,8 +11,9 @@ class BlogController extends Controller
 {
     public function index(){
         $blogs = Blog::where('user_id',auth()->id())->paginate(2);
+        $alls = Blog::paginate(2);
         $trashes = Blog::onlyTrashed()->get();
-        return view('dashboard.blog.index',compact('blogs','trashes'));
+        return view('dashboard.blog.index',compact('blogs','trashes','alls'));
     }
     public function insert_view(){
         $categories = Category::all();
@@ -23,7 +24,7 @@ class BlogController extends Controller
     // database insert
     public function insert(Request $request){
 
-        $new_name = auth()->id().'-'.$request->title.'-'.now()->format('d-m-Y').'.'.$request->file('image')->getClientOriginalExtension();
+        $new_name = auth()->id().'-'.rand(100,999).'-'.now()->format('d-m-Y').'.'.$request->file('image')->getClientOriginalExtension();
 
         $img = Image::make($request->file('image'))->resize(300, 200);
         $img->save(base_path('public/uploads/blog/'.$new_name), 60);
@@ -89,7 +90,7 @@ class BlogController extends Controller
             $blog = Blog::where('id',$id)->first();
              unlink(public_path('uploads/blog/'. $blog->image));
 
-                  $new_name = $id.'-'.$request->title.'-'.now()->format('d-m-Y').'.'.$request->file('image')->getClientOriginalExtension();
+                  $new_name = $id.'-'.rand(999,1000).'-'.now()->format('d-m-Y').'.'.$request->file('image')->getClientOriginalExtension();
 
                   $img = Image::make($request->file('image'))->resize(300, 200);
                   $img->save(base_path('public/uploads/blog/'.$new_name), 60);

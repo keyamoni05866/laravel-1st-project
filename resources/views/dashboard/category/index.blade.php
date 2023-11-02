@@ -59,7 +59,7 @@
                         <tbody>
                             @forelse ($categories as $category)
                                 <tr>
-                                    <th scope="row">{{ $loop->index + 1 }}</th>
+                                    <th scope="row">{{$categories->firstItem() + $loop->index  }}</th>
 
                                     <td>{{ $category->title }}</td>
         <td>
@@ -174,6 +174,7 @@
 
                         </tbody>
                     </table>
+                    {{ $categories->links() }}
                 </div>
             </div>
         </div>

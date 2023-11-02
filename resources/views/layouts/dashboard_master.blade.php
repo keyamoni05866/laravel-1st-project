@@ -76,15 +76,20 @@
                         <a href="{{ route('home') }}" class="active"><i
                                 class="material-icons-two-tone">dashboard</i>Dashboard</a>
                     </li>
+                    <li class="{{ \Request::route()->getName() == 'root' ? 'active-page' : '' }}">
+                        <a  target="_blank" href="{{ route('root') }}" class="active"><i class="material-icons-two-tone">web</i>Website</a>
+                    </li>
                     <li class="{{ \Request::route()->getName() == 'profile.index' ? 'active-page' : '' }}">
                         <a href="{{ route('profile.index') }}" class="active"><i
                                 class="material-icons-two-tone">face</i>Profile</a>
                     </li>
-                    <li class="{{ \Request::route()->getName() == 'settings' ? 'active-page' : '' }}">
-                        <a href="{{ route('settings') }}" class="active"><i
-                                class="material-icons-two-tone">settings</i>Settings</a>
-                    </li>
-                  @if (auth()->user()->role == 'admin')
+                   @if (auth()->user()->role == 'administrator' || 'admin')
+                     <li class="{{ \Request::route()->getName() == 'settings' ? 'active-page' : '' }}">
+                         <a href="{{ route('settings') }}" class="active"><i
+                                 class="material-icons-two-tone">settings</i>Settings</a>
+                     </li>
+                   @endif
+                  @if (auth()->user()->role == 'administrator')
                       <li class="{{ \Request::route()->getName() == 'category' ? 'active-page' : '' }}">
                           <a href="{{ route('category') }}" class="active"><i
                                   class="material-icons-two-tone">category</i>Categories</a>

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TagController extends Controller
 {
          public function index(){
-            $tags=Tag::where('user_id', auth()->id())->paginate(4);
+            $tags=Tag::where('user_id', auth()->id())->paginate(3);
             return view('dashboard.tag.index',compact('tags'));
          }
 
