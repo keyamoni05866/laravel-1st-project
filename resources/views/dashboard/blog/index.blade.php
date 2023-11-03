@@ -135,9 +135,9 @@
                                     <td>{{ $blog->RelationWithCategory->title }}</td>
                                     <td>
                                        @if ($blog->status == 'active')
-                                        <a href="{{ route('blog.status', $blog->id) }}" class="btn  btn-success btn-sm">{{ $blog->status }}</a
+                                        <a href="{{ route('blog.status', $blog->id) }}" class="btn  btn-success btn-sm">{{ $blog->status }}</a>
                                        @else
-                                        <a href="{{ route('blog.status', $blog->id) }}" class="btn  btn-outline-secondary btn-sm">{{ $blog->status }}</a
+                              <a  href="{{ route('blog.status', $blog->id) }}" class="btn  btn-outline-secondary btn-sm">{{ $blog->status }}</a>
 
 
                                        @endif
@@ -171,7 +171,7 @@
                                                                 <span class="text-info">{{ $blog->title }}</span>
                                                             </h4>
 
-                                                            <h6 class="fs-5"><span class=" me-2">Your Name:</span>
+                                                            <h6 class="fs-5"><span class=" me-2">Author Name:</span>
                                                                 {{ $blog->RelationWithUser->name }} </h6>
                                                             <h6 class="fs-5"><span class="me-2">Category-Name:</span>
                                                                 {{ $blog->RelationWithCategory->title }}</h6>
@@ -184,7 +184,10 @@
 
 
                                                             <p><span class="fw-bold fs-5">Description:</span>
-                                                                {{ $blog->description }}</p>
+                                                             @php
+                                                                 echo $blog->description ;
+                                                             @endphp
+                                                            </p>
                                                         </div>
 
                                                     </div>
