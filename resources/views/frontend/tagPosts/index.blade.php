@@ -1,6 +1,7 @@
-@extends('layouts.master');
+@extends('layouts.master')
 
 @section('content')
+
  <!--section-heading-->
  <div class="section-heading " >
     <div class="container-fluid">
@@ -8,7 +9,7 @@
              <div class="row">
                  <div class="col-lg-12">
                      <div class="section-heading-2-title">
-                         <h1>{{$category_blog->title}}</h1>
+                         <h1>{{$tag_name->title}}</h1>
                          <p class="links"><a href="index.html">Home <i class="las la-angle-right"></i></a> Blog</p>
                      </div>
                  </div>
@@ -100,29 +101,4 @@
      </div>
  </section>
 
-
-<!--pagination-->
-{{-- <div class="pagination">
-     <div class="container-fluid">
-         <div class="pagination-area">
-             <div class="row">
-                 <div class="col-lg-12">
-                     <div class="pagination-list">
-                         <ul class="list-inline">
-                             <li><a href="#" ><i class="las la-arrow-left"></i></a></li>
-                             <li><a href="#" class="active">1</a></li>
-                             <li><a href="#">2</a></li>
-                             <li><a href="#">3</a></li>
-                             <li><a href="#">4</a></li>
-                             <li><a href="#" ><i class="las la-arrow-right"></i></a></li>
-                         </ul>
-                     </div>
-                 </div>
-             </div>
-         </div>
-     </div>
- </div> --}}
-
-
 @endsection
-

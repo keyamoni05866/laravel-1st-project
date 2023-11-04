@@ -53,22 +53,12 @@
                             <div class="tags">
                                 <p>Tags:</p>
                                 <ul class="list-inline">
-                                    <li >
-                                        <a href="blog-layout-2.html">brading</a>
-                                    </li>
-                                    <li >
-                                        <a href="blog-layout-2.html">marketing</a>
-                                    </li>
-                                    <li >
-                                        <a href="blog-layout-3.html">tips</a>
-                                    </li>
-                                    <li >
-                                        <a href="blog-layout-4.html">design</a>
-                                    </li>
-                                    <li >
-                                        <a href="blog-layout-5.html">business
-                                        </a>
-                                    </li>
+                                  @foreach ($blog->ManyRelationTags as $item)
+                                      <li >
+                                          <a href="{{ route('root.tag.blog', $item->id)}}">{{$item->title}}</a>
+                                      </li>
+                                  @endforeach
+
                                 </ul>
                             </div>
                             <div class="social-media">

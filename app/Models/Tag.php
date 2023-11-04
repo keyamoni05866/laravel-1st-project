@@ -12,7 +12,7 @@ class Tag extends Model
     protected $guarded = [ " " ];
 
 
-    public function ManyRelationBlogs(){
+    public function manyrelationblogs(){
         return $this->belongsToMany(Blog::class);
     }
 }

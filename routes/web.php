@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontCategoryBlog;
 use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\FrontTagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
@@ -26,8 +27,12 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', [FrontendController::class, 'index'])->name('root');
+
+// this is for category related blogs
 Route::get('/root/category/blog/{id}', [FrontCategoryBlog::class, 'index'])->name('root.category.blog');
-Route::get('/root/category/blog/single/{id}', [FrontCategoryBlog::class, 'single'])->name('root.category.blog.single');
+// this is for single blog details
+Route::get('/root/blog/single/{id}', [FrontCategoryBlog::class, 'single'])->name('root.single');
+Route::get('/root/tag/blog/{id}', [FrontTagController::class, 'index'])->name('root.tag.blog');
 
 
 
