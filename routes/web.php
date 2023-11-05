@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FrontBlogsController;
 use App\Http\Controllers\FrontCategoryBlog;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\FrontTagController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SearchBlogController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\TagController;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +36,13 @@ Route::get('/root/category/blog/{id}', [FrontCategoryBlog::class, 'index'])->nam
 Route::get('/root/blog/single/{id}', [FrontCategoryBlog::class, 'single'])->name('root.single');
 Route::get('/root/tag/blog/{id}', [FrontTagController::class, 'index'])->name('root.tag.blog');
 
+// All blogs
 
+Route::get('/root/blogs', [FrontBlogsController::class, 'index'])->name('root.blogs');
+
+// search controller
+
+Route::get('/search/blogs', [SearchBlogController::class, 'index'])->name('search.blogs');
 
 // Route::get('/', function () {
 //     return view('welcome');

@@ -134,22 +134,33 @@
 
 
                     <!--pagination-->
-
+                    {{-- {{ $blogs->links() }} --}}
                     <div class="pagination">
-                        {{-- <div class="pagination-area "> --}}
-                            {{ $blogs->links() }}
-                            {{-- <div class="pagination-list">
+                        <div class="pagination-area">
+                            <div class="pagination-list">
                                 <ul class="list-inline">
-                                     <li><a href="#"><i class="las la-arrow-left"></i></a></li>
-                                    <li><a href="" class="active"></a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#"><i class="las la-arrow-right"></i></a></li>
+                                    @if ($blogs->onFirstPage())
+                                        <li class="disabled"><a href="#"><i class="las la-arrow-left"></i></a></li>
+                                    @else
+                                        <li><a href="{{ $blogs->previousPageUrl() }}"><i class="las la-arrow-left"></i></a></li>
+                                    @endif
 
+                                    @foreach ($blogs->getUrlRange(1, $blogs->lastPage()) as $page => $url)
+                                        @if ($page == $blogs->currentPage())
+                                            <li><a href="{{ $url }}" class="active">{{ $page }}</a></li>
+                                        @else
+                                            <li><a href="{{ $url }}">{{ $page }}</a></li>
+                                        @endif
+                                    @endforeach
+
+                                    @if ($blogs->hasMorePages())
+                                        <li><a href="{{ $blogs->nextPageUrl() }}"><i class="las la-arrow-right"></i></a></li>
+                                    @else
+                                        <li class="disabled"><a href="#"><i class="las la-arrow-right"></i></a></li>
+                                    @endif
                                 </ul>
-                            </div> --}}
-                        {{-- </div> --}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,9 +175,9 @@
                                 <h5>Search</h5>
                             </div>
                             <div class=" widget-search">
-                                <form action="https://oredoo.assiagroupe.net/Oredoo/search.html">
-                                    <input type="search" id="gsearch" name="gsearch" placeholder="Search ....">
-                                    <a href="search.html" class="btn-submit"><i class="las la-search"></i></a>
+                                <form action="{{ route('search.blogs')}}" method="GET">
+                                    <input type="search" id="gsearch" name="blog_search" placeholder="Search ...." name="blog_search">
+                                    <button type="submit" class="btn-submit"><i class="las la-search"></i></button>
                                 </form>
                             </div>
                         </div>

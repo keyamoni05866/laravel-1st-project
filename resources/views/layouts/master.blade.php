@@ -46,11 +46,11 @@
                         <!--navbar-collapse-->
                         <div class="collapse navbar-collapse" id="main_nav">
                             <ul class="navbar-nav ">
-                                <li class="nav-item ">
-                                    <a class="nav-link active" href="index.html"> Home </a>
+                                <li class="nav-item" >
+                                    <a class="nav-link {{ \Request::route()->getName() == 'root' ? 'active' : '' }}" href="{{ route('root')}}"> Home </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="blog.html"> Blogs </a>
+                                <li class="nav-item" class="">
+                                    <a class="nav-link {{ \Request::route()->getName() == 'root.blogs' ? 'active' : '' }}" href="{{ route('root.blogs')}}"> Blogs </a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="author.html"> Authors </a>
@@ -190,8 +190,8 @@
                         <button type="button" class="close">
                             <i class="far fa-times"></i>
                         </button>
-                        <form class="search-form" action="https://oredoo.assiagroupe.net/Oredoo/search.html">
-                            <input type="search" value="" placeholder="What are you looking for?">
+                        <form class="search-form" action="{{ route('search.blogs')}}" method="GET">
+                            <input type="search"  placeholder="What are you looking for?" name="blog_search">
                             <button type="submit" class="search-btn"> search</button>
                         </form>
                     </div>
