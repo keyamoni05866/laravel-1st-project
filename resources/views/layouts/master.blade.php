@@ -13,6 +13,9 @@
     <!-- Title -->Stay Connected
     <title> Oredoo - Personal Blog HTML Template </title>
 
+     {{-- sweet alert --}}
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- CSS Plugins -->
     <link rel="stylesheet" href="{{ asset('frontend')}}/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('frontend')}}/assets/css/owl.carousel.css">
@@ -85,9 +88,26 @@
                         <i class="las la-search"></i>
                     </div>
                     <!--button-subscribe-->
+
+                    @if (auth()->user()->role == 'author' && auth()->user()->as == 0)
+                        <div class="botton-sub">
+                            <a href="{{ route('pending.view')}}" class="btn-subscribe">Log Out</a>
+                        </div>
+                    @elseif (auth()->user()->role == 'author' && auth()->user()->as == 1)
                     <div class="botton-sub">
-                        <a href="signup.html" class="btn-subscribe">Sign Up</a>
+                        <a href="{{ route('home')}}" class="btn-subscribe">Home</a>
                     </div>
+
+
+
+
+                @else
+                <div class="botton-sub">
+                    <a href="{{ route('author.register.view')}}" class="btn-subscribe">Sign Up</a>
+                </div>
+
+                @endif
+
                     <!--navbar-toggler-->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -219,6 +239,6 @@
     <!-- JS main  -->
     <script src="{{ asset('frontend')}}/assets/js/main.js"></script>
 
-
+    @yield('footer_script')
 </body>
 </html>

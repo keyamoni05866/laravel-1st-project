@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthorRegisterController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontBlogsController;
@@ -43,6 +44,17 @@ Route::get('/root/blogs', [FrontBlogsController::class, 'index'])->name('root.bl
 // search controller
 
 Route::get('/search/blogs', [SearchBlogController::class, 'index'])->name('search.blogs');
+
+// frontend registration for author
+
+
+Route::get('/author/register',  [AuthorRegisterController::class, 'register_view'])->name('author.register.view');
+Route::post('/author/register',  [AuthorRegisterController::class, 'register'])->name('author.register');
+Route::get('/author/login',  [AuthorRegisterController::class, 'login_view'])->name('author.login.view');
+Route::post('/author/login',  [AuthorRegisterController::class, 'login'])->name('author.login');
+Route::get('/author/login',  [AuthorRegisterController::class, 'pending_view'])->name('pending.view');
+
+
 
 // Route::get('/', function () {
 //     return view('welcome');
