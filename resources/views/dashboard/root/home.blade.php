@@ -11,6 +11,49 @@
                             </div>
                         </div>
 
+    <div class="row">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header">
+                    Author Request
+                </div>
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+
+                          </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($author_requests as $author)
+                         @if ($author->as == false)
+                             <tr>
+                                  <th scope="row">{{$author_requests->firstItem() + $loop->index }}</th>
+                                  <td>{{$author->name}}</td>
+                                  <td><a href="" class="btn btn-info btn-sm">Accept</a></td>
+                                  <td><a href="" class="btn btn-info btn-dark">Reject</a></td>
+
+                           </tr>
+                         @endif
+                     @empty
+                     <tr>
+                        <td colspan="4" class="text-danger text-center">No Blogs Found </td>
+                    </tr>
+                     @endforelse
+
+
+                        </tbody>
+                      </table>
+                      {{ $author_requests->links() }}
+                </div>
+            </div>
+        </div>
+    </div>
+
 
 
 @endsection

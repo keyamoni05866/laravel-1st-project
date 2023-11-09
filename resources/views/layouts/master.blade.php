@@ -64,6 +64,18 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="contact.html"> Contact </a>
                                 </li>
+
+{{--
+                                 <li class="nav-item" class="">
+                                        @if (auth()->user()->role == 'author' && auth()->user()->as == 0)
+                                        <a class="nav-link {{ \Request::route()->getName() == 'pending.view' ? 'active' : '' }}" href="{{ route('pending.view')}}"> Pending </a>
+
+
+                                        @endif
+
+
+                                 </li> --}}
+
                             </ul>
                         </div>
                         <!--/-->
@@ -88,25 +100,29 @@
                         <i class="las la-search"></i>
                     </div>
                     <!--button-subscribe-->
+                        @auth
 
-                    @if (auth()->user()->role == 'author' && auth()->user()->as == 0)
+                        @if (auth()->user()->as == 1 )
                         <div class="botton-sub">
-                            <a href="{{ route('pending.view')}}" class="btn-subscribe">Log Out</a>
+                            <a href="{{ route('home')}}" class="btn-subscribe">Home</a>
                         </div>
-                    @elseif (auth()->user()->role == 'author' && auth()->user()->as == 1)
-                    <div class="botton-sub">
-                        <a href="{{ route('home')}}" class="btn-subscribe">Home</a>
-                    </div>
 
+                        @else
+                        <div class="botton-sub">
+                            <form action="{{ route('logout')}}" method="POST">
+                                @csrf
+                            <button type="submit" class="btn-subscribe">Log Out</button>
+                        </form>
+                        </div>
+                        @endif
 
+                        @else
 
+                            <div class="botton-sub">
+                                <a href="{{ route('author.register.view')}}" class="btn-subscribe">Sign Up</a>
+                            </div>
 
-                @else
-                <div class="botton-sub">
-                    <a href="{{ route('author.register.view')}}" class="btn-subscribe">Sign Up</a>
-                </div>
-
-                @endif
+                        @endauth
 
                     <!--navbar-toggler-->
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main_nav"

@@ -1,5 +1,6 @@
 <?php
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\AuthorRegisterController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
@@ -25,9 +26,9 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
+
 // frontend start
-
-
 
 Route::get('/', [FrontendController::class, 'index'])->name('root');
 
@@ -52,20 +53,22 @@ Route::get('/author/register',  [AuthorRegisterController::class, 'register_view
 Route::post('/author/register',  [AuthorRegisterController::class, 'register'])->name('author.register');
 Route::get('/author/login',  [AuthorRegisterController::class, 'login_view'])->name('author.login.view');
 Route::post('/author/login',  [AuthorRegisterController::class, 'login'])->name('author.login');
-Route::get('/author/login',  [AuthorRegisterController::class, 'pending_view'])->name('pending.view');
+Route::get('/author/pending',  [AuthorRegisterController::class, 'pending_view'])->name('pending.view');
+
+// author request approve and reject route
 
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+
+
 
 // for registration off
 
 Auth::routes(['register' => false]);
-// Auth::routes();
+Auth::routes(['verify' =>true]);
 
-Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware(['auth', 'verified', 'approve_status'])->name('home');
 // dashboard starts
 
 // Profile Controller
@@ -116,3 +119,23 @@ Route::get('/blog/feature/update/{id}', [BlogController::class, 'feature'])->nam
 Route::get('/blog/status/{id}', [BlogController::class, 'status'])->name('blog.status');
 
 
+// email varification
+Route::get('/email/verify', function () {
+    return view('auth.verify');
+})->middleware('auth')->name('verification.notice');
+
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+
+    return redirect('/home');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+// email verification end

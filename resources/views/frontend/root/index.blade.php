@@ -106,7 +106,7 @@
                     </div>
 
                     <!--post1-->
-                  @foreach ($blogs as $blog)
+                  @forelse ($blogs as $blog)
                       <div class="post-list post-list-style4">
                           <div class="post-list-image">
                               <a href="post-single.html">
@@ -130,7 +130,9 @@
                               </div>
                           </div>
                       </div>
-                  @endforeach
+                      @empty
+                      <h2>Blogs not found</h2>
+                  @endforelse
 
 
                     <!--pagination-->
@@ -190,7 +192,7 @@
 
                             <ul class="widget-popular-posts">
                                 <!--post1-->
-                               @foreach ($popular_blogs as $blog)
+                               @forelse ($popular_blogs as $blog)
                                  <li class="small-post">
                                      <div class="small-post-image">
                                          <a href="{{ route('root.single',$blog->id)}}">
@@ -205,7 +207,10 @@
                                          <small> <span class="slash"></span>{{ \Carbon\Carbon::parse($blog->date)->diffForHumans() }}</small>
                                      </div>
                                  </li>
-                               @endforeach
+
+                                 @empty
+                                 <h2>NO post found</h2>
+                               @endforelse
 
 
                             </ul>
@@ -265,11 +270,13 @@
                             </div>
                             <div class="widget-tags">
                                 <ul class="list-inline">
-                                   @foreach ($tags as $tag)
+                                   @forelse ($tags as $tag)
                                      <li>
                                          <a href="#">{{$tag->title}}</a>
                                      </li>
-                                   @endforeach
+                                     @empty
+                                     <h3> no tags found</h3>
+                                   @endforelse
 
                                 </ul>
                             </div>

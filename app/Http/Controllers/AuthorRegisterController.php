@@ -12,6 +12,9 @@ class AuthorRegisterController extends Controller
     return view('frontend.authorRegister.register');
    }
 
+
+
+
    public function register(Request $request){
      $request->validate([
            'name'=>'required',
@@ -41,6 +44,8 @@ class AuthorRegisterController extends Controller
     if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
        if(auth()->user()->as == 1){
              return view('dashboard.root.home');
+             $user_id = User::where('email',$request->email)->orWhere('password',$request->password)->first();
+            $user_id->sendEmailVerificationNotification();
        }else{
         return view('frontend.authorRegister.approve');
        }

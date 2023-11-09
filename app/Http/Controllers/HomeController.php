@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -13,7 +14,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware(['auth','verified']);
     }
 
     /**
@@ -23,9 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if(auth()->user()->role == 'admin' || auth()->user()->role == 'administrator' ){
-            return view('dashboard.root.home');
+             $author_requests= User::where('role','author')->paginate(4);
 
-        }
+
+            return view('dashboard.root.home', compact('author_requests'));
+
+
     }
 }
