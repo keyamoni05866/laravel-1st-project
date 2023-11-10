@@ -32,6 +32,8 @@ class AuthorRegisterController extends Controller
     //  $s_email =$request->email;
     //  $s_password =$request->password;
 
+
+
      return redirect()->route('author.login.view')->with('register_message','Your Registration Successful')->with('s_email',"$request->email")->with('s_password',"$request->password");
    }
 

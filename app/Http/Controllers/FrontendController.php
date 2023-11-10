@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Contacts;
 use App\Models\Tag;
 use Illuminate\Http\Request;
 
@@ -24,4 +25,39 @@ class FrontendController extends Controller
            'tags' => $tags,
         ]);
     }
+
+
+    // frontend contacts part
+
+    public function contact_view(){
+               return view('frontend.contact.index');
+    }
+    public function contact_post(Request $request){
+
+    if(auth()->id()){
+        Contacts::insert([
+            'auth_id' => auth()->id(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'created_at' => now(),
+
+         ]);
+         return back();
+    }else{
+        Contacts::insert([
+
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message,
+            'created_at' => now(),
+         ]);
+         return back();
+    }
+    }
+
+
+
 }

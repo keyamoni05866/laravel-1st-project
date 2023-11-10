@@ -2,6 +2,7 @@
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AuthorRegisterController;
+use App\Http\Controllers\AuthorRequestController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontBlogsController;
@@ -57,9 +58,13 @@ Route::get('/author/pending',  [AuthorRegisterController::class, 'pending_view']
 
 // author request approve and reject route
 
+Route::get('/author/accept/{id}',  [AuthorRequestController::class, 'accept'])->name('author.accept');
+Route::get('/author/reject/{id}',  [AuthorRequestController::class, 'reject'])->name('author.reject');
 
+// frontend contact
 
-
+Route::get('/contacts', [FrontendController::class, 'contact_view'])->name('contacts');
+Route::post('/contacts/post', [FrontendController::class, 'contact_post'])->name('contacts.post');
 
 
 

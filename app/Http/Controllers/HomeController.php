@@ -24,11 +24,15 @@ class HomeController extends Controller
      */
     public function index()
     {
-             $author_requests= User::where('role','author')->paginate(4);
+             $author_requests= User::where( 'as',0)->orWhere('role','author')->get();
 
+                if(auth()->user()->role == 'administrator' || auth()->user()->role == 'admin' )
+                    {
+                        return view('dashboard.root.home', compact('author_requests'));
 
-            return view('dashboard.root.home', compact('author_requests'));
-
+                    }else{
+                        return view('dashboard.profile.index');
+                    }
 
     }
 }

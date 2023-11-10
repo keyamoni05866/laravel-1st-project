@@ -61,8 +61,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link" href="about.html"> About </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" href="contact.html"> Contact </a>
+                                <li class="nav-item" class="">
+                                    <a class="nav-link {{ \Request::route()->getName() == 'contacts' ? 'active' : '' }}" href="{{ route('contacts')}}"> Contacts </a>
                                 </li>
 
 {{--

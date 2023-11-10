@@ -30,15 +30,17 @@
                         </thead>
                         <tbody>
                             @forelse ($author_requests as $author)
-                         @if ($author->as == false)
-                             <tr>
-                                  <th scope="row">{{$author_requests->firstItem() + $loop->index }}</th>
-                                  <td>{{$author->name}}</td>
-                                  <td><a href="" class="btn btn-info btn-sm">Accept</a></td>
-                                  <td><a href="" class="btn btn-info btn-dark">Reject</a></td>
 
-                           </tr>
+                         @if ($author->as == false)
+                                <tr>
+                                     <th scope="row">{{ $loop->index + 1}}</th>
+                                     <td>{{$author->name}}</td>
+                                     <td><a href="{{ route('author.accept', $author->id)}}" class="btn btn-info btn-sm">Accept</a></td>
+                                     <td><a href="{{ route('author.reject', $author->id)}}" class="btn btn-info btn-dark">Reject</a></td>
+
+                              </tr>
                          @endif
+
                      @empty
                      <tr>
                         <td colspan="4" class="text-danger text-center">No Blogs Found </td>
@@ -48,7 +50,7 @@
 
                         </tbody>
                       </table>
-                      {{ $author_requests->links() }}
+                      {{-- {{ $author_requests->links() }} --}}
                 </div>
             </div>
         </div>
