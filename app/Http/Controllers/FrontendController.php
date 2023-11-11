@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMail;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Contacts;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class FrontendController extends Controller
 {
@@ -44,6 +46,9 @@ class FrontendController extends Controller
             'created_at' => now(),
 
          ]);
+
+        Mail::to($request->email)->send(new ContactMail($request->except('_token')));
+
          return back();
     }else{
         Contacts::insert([
@@ -54,6 +59,9 @@ class FrontendController extends Controller
             'message' => $request->message,
             'created_at' => now(),
          ]);
+
+        Mail::to($request->email)->send(new ContactMail($request->except('_token')));
+
          return back();
     }
     }
